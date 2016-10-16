@@ -8,7 +8,7 @@ This algorithm would work for larger puzzles (though the additional pieces would
 
 Example code (Extracted from test class):
 
-	  int columns = 4;
+	 	int columns = 4;
 		int rows = 4;
 		List<RotatingPiece> pieces = getPieces();
 		Puzzle puzzle = new Puzzle(columns, rows);
