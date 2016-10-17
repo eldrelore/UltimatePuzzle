@@ -1,7 +1,7 @@
 package org.eldrelore.puzzle.array;
 
 import org.eldrelore.puzzle.dto.Board;
-import org.eldrelore.puzzle.dto.RotatingPiece;
+import org.eldrelore.puzzle.dto.Piece;
 
 /**
  * Handles the matrix algebra necessary to rotate an n dimensional matrix
@@ -25,7 +25,7 @@ public class ArrayRotation {
 		 */
 		for (int column = 0; column < board.getColumns(); column++) {
 			for (int row = 0; row < board.getRows(); row++) {
-				RotatingPiece piece = board.getPieceAtLocation(column, row);
+				Piece piece = board.getPieceAtLocation(column, row);
 				piece.rotateClockwise();
 				int newColumn = (board.getRows() - row) - 1;
 				int newRow = column;

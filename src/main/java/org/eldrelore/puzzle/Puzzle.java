@@ -1,11 +1,10 @@
 package org.eldrelore.puzzle;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.eldrelore.puzzle.dto.Board;
 import org.eldrelore.puzzle.dto.Piece;
-import org.eldrelore.puzzle.dto.RotatingPiece;
 
 /**
  * A puzzle. Has a board, and the recursive algorithm to solve puzzle. Currently
@@ -15,20 +14,69 @@ import org.eldrelore.puzzle.dto.RotatingPiece;
  */
 public class Puzzle {
 
+	/**
+	 * puzzle pieces (added for executables)
+	 */
+	private Collection<Piece> pieces = new ArrayList<Piece>();
+	/**
+	 * board for puzzle
+	 */
 	private Board board = null;
 
+	/**
+	 * 
+	 * @return Board
+	 */
+	public Board getBoard() {
+		return board;
+	}
+
+	/**
+	 * 
+	 * @return Collection<Piece>
+	 */
+	public Collection<Piece> getPieces() {
+		return pieces;
+	}
+
+	/**
+	 * 
+	 * @param pieces
+	 */
+	public void setPieces(Collection<Piece> pieces) {
+		this.pieces = pieces;
+	}
+
+	/**
+	 * 
+	 * @param board
+	 */
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	/**
+	 * public parameterized constructor
+	 * 
+	 * @param columns
+	 * @param rows
+	 */
 	public Puzzle(int columns, int rows) {
 		board = new Board(columns, rows);
 	}
 
-	private List<String> solutions = new ArrayList<String>();
+	/**
+	 * solutions
+	 */
+	private Collection<String> solutions = new ArrayList<String>();
 
-	public List<String> getSolutions() {
+	/**
+	 * retrieve solutions
+	 * 
+	 * @return Collection<String>
+	 */
+	public Collection<String> getSolutions() {
 		return solutions;
-	}
-
-	public void setSolutions(List<String> solutions) {
-		this.solutions = solutions;
 	}
 
 	/**
@@ -36,7 +84,7 @@ public class Puzzle {
 	 * 
 	 * @param pieces
 	 */
-	public void solvePuzzle(List<RotatingPiece> pieces) {
+	public void solvePuzzle(Collection<Piece> pieces) {
 		/*
 		 * For each location in the puzzle
 		 * 
@@ -64,7 +112,7 @@ public class Puzzle {
 			 */
 
 			boolean pieceFits = false;
-			for (RotatingPiece piece : pieces) {
+			for (Piece piece : pieces) {
 				for (int i = 0; i < 4; i++) {
 					pieceFits = doesPieceFit(piece);
 
@@ -102,9 +150,9 @@ public class Puzzle {
 	 * @param pieces
 	 * @param piece
 	 */
-	private void pieceFits(List<RotatingPiece> pieces, RotatingPiece piece) {
+	private void pieceFits(Collection<Piece> pieces, Piece piece) {
 		board.getNextLocation();
-		List<RotatingPiece> recursivePieces = new ArrayList<RotatingPiece>();
+		Collection<Piece> recursivePieces = new ArrayList<Piece>();
 		recursivePieces.addAll(pieces);
 		recursivePieces.remove(piece);
 		solvePuzzle(recursivePieces);
@@ -120,7 +168,7 @@ public class Puzzle {
 	 * 
 	 * @param piece
 	 */
-	private void pieceDoesNotFit(RotatingPiece piece) {
+	private void pieceDoesNotFit(Piece piece) {
 		piece.rotateClockwise();
 	}
 
@@ -150,7 +198,7 @@ public class Puzzle {
 	 * @param piece
 	 * @return
 	 */
-	public boolean doesPieceFit(RotatingPiece piece) {
+	public boolean doesPieceFit(Piece piece) {
 		boolean fitsLeft = false;
 		boolean fitsTop = false;
 		if (0 == board.getCurrentColumn()) {
@@ -175,5 +223,4 @@ public class Puzzle {
 		board.setPieceAtLocation(piece, board.getCurrentColumn(), board.getCurrentRow());
 		return pieceFits;
 	}
-
 }

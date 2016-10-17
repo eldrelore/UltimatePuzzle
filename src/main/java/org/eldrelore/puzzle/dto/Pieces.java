@@ -114,17 +114,17 @@ public enum Pieces {
 	 * @param identifier
 	 * @return
 	 */
-	public static RotatingPiece getPieceByIdentifier(String identifier) {
+	public static Piece getPieceByIdentifier(String identifier) {
 		Piece piece = null;
 		if (lookup.containsKey(identifier)) {
 			piece = lookup.get(identifier);
 		}
 
-		return new RotatingPiece(piece);
+		return piece.clonePiece();
 	}
 
-	public RotatingPiece getPiece() {
-		return new RotatingPiece(piece);
+	public Piece getPiece() {
+		return piece.clonePiece();
 	}
 
 	private void setPiece(Piece piece) {

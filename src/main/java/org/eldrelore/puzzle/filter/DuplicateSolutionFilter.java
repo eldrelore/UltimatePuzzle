@@ -1,7 +1,7 @@
 package org.eldrelore.puzzle.filter;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import org.eldrelore.puzzle.array.ArrayRotation;
 import org.eldrelore.puzzle.dto.Board;
@@ -21,11 +21,11 @@ public class DuplicateSolutionFilter {
 		this.rows = rows;
 	}
 
-	public List<String> filterSolutions(List<String> puzzleSolutions) {
-		List<String> filteringSolutions = new ArrayList<String>();
+	public Collection<String> filterSolutions(Collection<String> puzzleSolutions) {
+		Collection<String> filteringSolutions = new ArrayList<String>();
 		filteringSolutions.addAll(puzzleSolutions);
 		ArrayRotation rotation = new ArrayRotation();
-		List<String> rotationRemovals = new ArrayList<String>();
+		Collection<String> rotationRemovals = new ArrayList<String>();
 		/* filter out solutions that are the same except for rotation. */
 		Board replicaBoard = new Board(columns, rows);
 		for (String solution : filteringSolutions) {
