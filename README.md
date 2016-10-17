@@ -10,17 +10,14 @@ Example code (Extracted from test class):
 
 	 	int columns = 4;
 		int rows = 4;
-		List<RotatingPiece> pieces = getPieces();
+		Collection<Piece> pieces = getPieces();
 		Puzzle puzzle = new Puzzle(columns, rows);
 		puzzle.solvePuzzle(pieces);
-		DuplicateSolutionFilter filter = new DuplicateSolutionFilter(columns, rows);
-		List<String> filteredSolutions = filter.filterSolutions(puzzle.getSolutions());
-		boolean solutionFound = false;
-		System.out.println(filteredSolutions.size() + " solutions found.");
+		Collection<String> filteredSolutions = filterDuplicateSolutions(columns, rows, puzzle.getSolutions());
+		assertTrue(filteredSolutions.size() > 0);
 		int counter = 0;
-		for (String solution : filteredSolutions) {
+		System.out.println(filteredSolutions.size() + " solutions found.");
+		for (String solution : solutions) {
 			counter++;
-			solutionFound = true;
 			System.out.println("Solution " + counter + ": " + solution);
 		}
-		assertTrue(solutionFound);
